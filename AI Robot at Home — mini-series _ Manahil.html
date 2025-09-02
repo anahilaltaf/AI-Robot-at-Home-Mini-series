@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///C:/Users/sami%20computers/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Short command: AI Robot at Home mini-series -->
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AI Robot at Home — mini-series | Manahil</title>
+  <meta name="description" content="AI Robot at Home — mini-series: short episodes that teach building robots with Arduino &amp; AI. Created by Manahil. Contact: manayaltahaf23@gmail.com">
+  <meta name="keywords" content="robotics, arduino, tinyml, ai robot, tutorials, Manahil, mini-series">
+  <meta name="author" content="Manahil">
+
+  <style>
+    /* ============================
+       AI Robot at Home — Single File
+       Mobile-first, lightweight
+       ============================ */
+
+    :root{
+      --blue:#dff6ff;      /* left light blue */
+      --purple:#f0e7ff;    /* right light purple */
+      --accent:#4f46e5;    /* CTA */
+      --muted:#40506b;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.7);
+      --soft-shadow: 0 8px 30px rgba(16,24,40,0.06);
+      --radius:14px;
+      --logo-size:42px;
+      --max-width:1080px;
+      --sponsor-bg: linear-gradient(90deg,#fffbea,#fff0f0);
+    }
+
+    /* Page reset */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial}
+    body{
+      background:
+        /* diagonal subtle split */
+        linear-gradient(110deg, var(--blue) 45%, var(--purple) 45%);
+      color:var(--muted);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;justify-content:center;padding:18px;
+    }
+    .wrap{width:100%;max-width:var(--max-width)}
+
+    /* Header / Logo */
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:10px 8px;border-radius:12px;margin-bottom:14px;
+      background:transparent;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:var(--logo-size);height:var(--logo-size);border-radius:10px;
+      display:grid;place-items:center;font-weight:800;color:white;
+      background:linear-gradient(135deg,#4f46e5,#06b6d4);box-shadow:0 6px 20px rgba(79,70,229,0.18);
+      position:relative;overflow:visible;
+    }
+    /* tiny animated robot inside logo (SVG) */
+    .logo svg{width:calc(var(--logo-size) - 10px);height:calc(var(--logo-size) - 10px);display:block}
+    .brand h1{font-size:16px;margin:0;color:#0b2545}
+    .brand p{margin:0;font-size:12px;color:rgba(11,37,69,0.6)}
+
+    nav{display:flex;gap:10px;align-items:center}
+    nav a{font-size:14px;color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
+    nav a:hover{background:rgba(11,37,69,0.04)}
+
+    /* Hero: split layout - mobile first stacked */
+    .hero{
+      display:grid;grid-template-columns:1fr;gap:14px;align-items:center;margin-bottom:18px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+      padding:16px;border-radius:var(--radius);box-shadow:var(--soft-shadow);
+    }
+
+    /* hero left content */
+    .hero-main{padding:6px}
+    .kicker{font-size:12px;color:var(--accent);font-weight:700;margin-bottom:6px}
+    .title{font-size:22px;line-height:1.05;color:#07263b;margin-bottom:8px}
+    .subtitle{font-size:14px;color:#415b73;margin-bottom:12px}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;padding:12px 16px;border-radius:12px;border:0;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(79,70,229,0.12);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .btn:active{transform:scale(.98)}
+    .btn-ghost{background:transparent;border:1px solid rgba(11,37,69,0.06);color:var(--muted);padding:10px 14px;border-radius:10px}
+
+    /* hero visual - right */
+    .hero-visual{
+      display:flex;justify-content:center;align-items:center;padding:8px;
+    }
+    .robot-card{
+      width:220px;background:var(--card);border-radius:12px;padding:12px;box-shadow:var(--soft-shadow);
+      display:flex;flex-direction:column;align-items:center;gap:8px;
+      position:relative;overflow:visible;
+    }
+    /* robot SVG (glasses) */
+    .robot-svg{width:120px;height:120px;display:block}
+    .speech{
+      background:linear-gradient(180deg,#fff,#f3f9ff);padding:8px 12px;border-radius:999px;font-weight:700;color:#083358;
+      border:1px solid rgba(0,0,0,0.04);box-shadow:0 8px 24px rgba(3,59,92,0.06);
+      transform-origin:center bottom;opacity:0;transform:translateY(8px) scale(.98);transition:all .28s ease;
+    }
+    .speech.show{opacity:1;transform:translateY(0) scale(1)}
+
+    /* tiny animated decorations: micro-encryptions */
+    .encrypt{
+      position:absolute;right:10px;top:8px;font-size:10px;color:rgba(3,59,92,0.12);
+      letter-spacing:1px;transform:rotate(-8deg);
+    }
+    .encrypt span{display:inline-block;animation:moveX 3s linear infinite}
+    @keyframes moveX{0%{transform:translateX(0)}50%{transform:translateX(4px)}100%{transform:translateX(0)}}
+
+    /* Sections */
+    section.block{margin-bottom:14px}
+    .grid{display:grid;gap:12px}
+    .cards{display:grid;grid-template-columns:1fr;gap:12px}
+
+    /* Episode list (cards) */
+    .episode{background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--soft-shadow);display:flex;gap:10px;align-items:center}
+    .episode .num{width:46px;height:46px;border-radius:10px;background:linear-gradient(90deg,#06b6d4,#4f46e5);color:white;display:grid;place-items:center;font-weight:800}
+    .episode h4{margin:0;font-size:15px}
+    .episode p{margin:0;font-size:13px;color:#48647f}
+
+    /* Tools & Downloads */
+    .tools{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .tool-card{background:var(--card);padding:12px;border-radius:12px;box-shadow:var(--soft-shadow)}
+    .download-btn{display:inline-block;margin-top:8px;padding:8px 10px;border-radius:10px;background:#eef6ff;color:#06395a;text-decoration:none;border:1px solid rgba(6,57,90,0.06)}
+
+    /* Sponsor / Advertise (editable by admin) */
+    .sponsor{background:var(--sponsor-bg);padding:12px;border-radius:12px;border:1px dashed rgba(79,70,229,0.12);display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .sponsor .left{font-weight:700}
+    .sponsor .right{font-size:13px}
+    .sponsor [contenteditable]{outline:2px dashed rgba(79,70,229,0.06);padding:6px;border-radius:8px}
+
+    /* Contact & Footer */
+    footer{margin-top:16px;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.5));display:flex;justify-content:space-between;align-items:center;gap:12px;box-shadow:var(--soft-shadow)}
+    .contact-line{font-size:14px;color:#07263b}
+    .contact-line a{color:var(--accent);text-decoration:none;font-weight:700}
+
+    /* Responsive media */
+    @media(min-width:880px){
+      .hero{grid-template-columns:1fr 360px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .tools{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media(min-width:1200px){
+      .cards{grid-template-columns:repeat(3,1fr)}
+    }
+
+    /* SEO / accessibility helper */
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+  </style>
+</head>
+<body>
+  <div class="wrap" role="main">
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="false" title="M - Manahil logo">
+          <!-- Logo: M with tiny animated robot character -->
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img">
+            <defs>
+              <lineargradient id="lg" x1="0" x2="1"><stop offset="0" stop-color="#4f46e5"></stop><stop offset="1" stop-color="#06b6d4"></stop></lineargradient>
+            </defs>
+            <!-- M letter -->
+            <path d="M8 52V12l12 20 12-20 12 40v-40" fill="none" stroke="url(#lg)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+            <!-- tiny robot head (animated via CSS on .logo) -->
+            <g transform="translate(44,8)">
+              <rect x="-6" y="4" width="14" height="12" rx="3" fill="#fff" stroke="rgba(0,0,0,0.06)"></rect>
+              <circle cx="1" cy="10" r="2" fill="#4f46e5"></circle>
+            </g>
+          </svg>
+        </div>
+        <div>
+          <h1>AI Robot at Home</h1>
+          <p class="muted">mini-series • quick episodes • build at home</p>
+        </div>
+      </div>
+
+      <nav aria-label="Top navigation">
+        <a href="file:///C:/Users/sami%20computers/index.html#episodes">Episodes</a>
+        <a href="file:///C:/Users/sami%20computers/index.html#tools">Tools</a>
+        <a href="file:///C:/Users/sami%20computers/index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-main">
+        <div class="kicker">AI Robot at Home • mini-series</div>
+        <h2 id="heroTitle" class="title">Start building friendly robots — episode-by-episode</h2>
+        <p class="subtitle">Short lessons, real parts, tiny AI experiments. Fast, friendly, CEO-and-school-friendly.</p>
+
+        <div class="cta-row">
+          <button id="start" class="btn" aria-controls="episodes">Start Building</button>
+          <button id="preview" class="btn-ghost" onclick="document.getElementById(&#39;tools&#39;).scrollIntoView({behavior:&#39;smooth&#39;})">Tools &amp; Downloads</button>
+        </div>
+
+        <div style="margin-top:12px;font-size:13px;color:#2b475e">Sponsor slot: <strong contenteditable="" id="sponsor-edit">Your sponsor text (click to edit)</strong></div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="robot-card" aria-hidden="false">
+          <div class="encrypt" aria-hidden="true"><span>• • •</span></div>
+
+          <!-- Robot SVG with glasses (inline) -->
+          <svg class="robot-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Friendly robot">
+            <defs>
+              <lineargradient id="rgrad" x1="0" x2="1"><stop offset="0" stop-color="#06b6d4"></stop><stop offset="1" stop-color="#4f46e5"></stop></lineargradient>
+            </defs>
+            <!-- body -->
+            <rect x="22" y="24" width="76" height="68" rx="12" fill="url(#rgrad)" opacity="0.12"></rect>
+            <!-- head -->
+            <rect x="36" y="12" width="48" height="36" rx="8" fill="#fff"></rect>
+            <!-- glasses -->
+            <rect x="44" y="18" width="12" height="10" rx="3" fill="#083358"></rect>
+            <rect x="64" y="18" width="12" height="10" rx="3" fill="#083358"></rect>
+            <rect x="56" y="22" width="8" height="2" fill="#083358"></rect>
+            <!-- eyes (light) -->
+            <circle cx="50" cy="24" r="2" fill="#fff"></circle>
+            <circle cx="74" cy="24" r="2" fill="#fff"></circle>
+            <!-- smile -->
+            <path d="M52 34 q8 6 16 0" stroke="#083358" stroke-width="2" fill="none" stroke-linecap="round"></path>
+            <!-- antenna -->
+            <line x1="60" y1="8" x2="60" y2="0" stroke="#4f46e5" stroke-width="2"></line>
+            <circle cx="60" cy="0" r="2.8" fill="#ff6b6b"></circle>
+            <!-- legs -->
+            <rect x="44" y="88" width="8" height="18" rx="4" fill="#fff" opacity="0.9"></rect>
+            <rect x="68" y="88" width="8" height="18" rx="4" fill="#fff" opacity="0.9"></rect>
+          </svg>
+
+          <div id="greeting" class="speech show" aria-live="polite">Hello — M.Viewers!</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Episodes -->
+    <section id="episodes" class="block">
+      <h3 style="margin-bottom:8px">Episode List</h3>
+      <p class="muted" style="margin-bottom:10px">Three short episodes to take you from parts to tiny AI.</p>
+
+      <div class="cards">
+        <article class="episode" aria-labelledby="e1">
+          <div class="num">1</div>
+          <div>
+            <h4 id="e1">Episode 1 — Parts &amp; Assembly</h4>
+            <p>What to buy, quick chassis assembly, motor basics. <a href="https://youtu.be/5jh-5HGvC-I" target="_blank" rel="noopener">Watch demo</a></p>
+          </div>
+        </article>
+
+        <article class="episode" aria-labelledby="e2">
+          <div class="num">2</div>
+          <div>
+            <h4 id="e2">Episode 2 — Wiring &amp; Code</h4>
+            <p>Wire motors &amp; sensors, upload an Arduino sketch, testing tips. <a href="https://youtu.be/QoNkpnpvEqc" target="_blank" rel="noopener">Watch demo</a></p>
+          </div>
+        </article>
+
+        <article class="episode" aria-labelledby="e3">
+          <div class="num">3</div>
+          <div>
+            <h4 id="e3">Episode 3 — Tiny AI Features</h4>
+            <p>Voice control &amp; TinyML basics (Edge Impulse quick start). <a href="https://youtu.be/dls0LtSUlCo" target="_blank" rel="noopener">Watch demo</a></p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Tools & Downloads -->
+    <section id="tools" class="block">
+      <h3 style="margin-bottom:8px">Tools &amp; Downloads</h3>
+      <p class="muted" style="margin-bottom:10px">Starter kit checklist, wiring diagrams, and sample code.</p>
+
+      <div class="tools">
+        <div class="tool-card">
+          <strong>Starter Parts</strong>
+          <ul style="margin-top:8px;color:#234a62">
+            <li>Arduino UNO or Nano</li>
+            <li>Motor driver (L298N / TB6612)</li>
+            <li>2× DC gear motors + wheels</li>
+            <li>IR sensors / HC-SR04 ultrasonic</li>
+            <li>Battery 7.4–9V + holder, jumper wires</li>
+          </ul>
+          <a class="download-btn" href="file:///C:/Users/sami%20computers/index.html#" onclick="alert(&#39;Download starter checklist (placeholder)&#39;)">Download checklist</a>
+        </div>
+
+        <div class="tool-card">
+          <strong>Sample Code</strong>
+          <p style="margin-top:8px;color:#234a62">Copy-paste ready Arduino snippets for each episode.</p>
+          <a class="download-btn" href="file:///C:/Users/sami%20computers/index.html#" onclick="alert(&#39;Download code ZIP (placeholder)&#39;)">Download code (ZIP)</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsor / Advertise -->
+    <section class="block">
+      <div class="sponsor" role="region" aria-label="Sponsor">
+        <div class="left">Sponsor:</div>
+        <div class="right" contenteditable="true" id="sponsorSlot">Your sponsor or ad here — click to edit</div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="block">
+      <h3 style="margin-bottom:8px">Contact &amp; Support</h3>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px" class="tool-card">
+          <strong>Questions?</strong>
+          <p style="margin-top:8px;color:#234a62">Email me directly for help, collabs or sponsorships:</p>
+          <p style="margin-top:8px"><a class="contact-line" href="mailto:manayaltahaf23@gmail.com">manayaltahaf23@gmail.com</a></p>
+        </div>
+
+        <div style="width:260px" class="tool-card">
+          <strong>Advertise</strong>
+          <p style="margin-top:8px;color:#234a62">Small advert card — admin can edit sponsor slot above.</p>
+          <div style="margin-top:8px;padding:8px;border-radius:8px;background:#fffef6;border:1px solid rgba(0,0,0,0.03);font-size:14px">
+            <strong>Advertise with us</strong>
+            <div style="margin-top:6px;font-size:13px;color:#375a72">Email: <a href="mailto:manayaltahaf23@gmail.com">manayaltahaf23@gmail.com</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>© <span id="year">2025</span> AI Robot at Home — Created by <strong>Manahil</strong></div>
+      <div><a href="mailto:manayaltahaf23@gmail.com">manayaltahaf23@gmail.com</a></div>
+    </footer>
+
+  </div>
+
+  <!-- ======================
+       Tiny ready-to-use snippet:
+       Paste into an HTML file to see a simple animated robot that says "Hello M.Viewers!"
+       ======================
+       <script>
+         (function(){ const sn = document.createElement('div'); sn.innerHTML = '<div style=\"display:flex;align-items:center;gap:8px\"><svg width=\"48\" height=\"48\" viewBox=\"0 0 64 64\"> <rect x=\"10\" y=\"16\" width=\"44\" height=\"32\" rx=\"6\" fill=\"#06b6d4\"/> <circle cx=\"26\" cy=\"30\" r=\"3\" fill=\"#fff\"/> <circle cx=\"38\" cy=\"30\" r=\"3\" fill=\"#fff\"/> </svg> <strong>Hello M.Viewers!</strong></div>'; document.body.appendChild(sn); })();
+       </script>
+     ====================== -->
+
+  <script>
+    // Lightweight interactivity & animation control (no frameworks)
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Show greeting bubble on load (after small delay) and try speech (if allowed)
+    const bubble = document.getElementById('greeting');
+    function showGreeting(){
+      bubble.classList.add('show');
+      // optional: try speech synthesis (will be blocked until user gesture on some browsers)
+      if('speechSynthesis' in window){
+        try{
+          const utter = new SpeechSynthesisUtterance('Hello M Viewers');
+          utter.lang = 'en-US';
+          speechSynthesis.cancel();
+          speechSynthesis.speak(utter);
+        }catch(e){ /* ignore */ }
+      }
+    }
+    // delay to let page paint
+    setTimeout(showGreeting, 700);
+
+    // Start button scroll to episodes
+    document.getElementById('start').addEventListener('click', function(){
+      document.getElementById('episodes').scrollIntoView({behavior:'smooth', block:'start'});
+      // subtle feedback
+      this.animate([{transform:'scale(1)'},{transform:'scale(.98)'},{transform:'scale(1)'}],{duration:220});
+    });
+
+    // Micro-encryptions: subtle animated characters (already CSS)
+    // Admin notes: contenteditable elements for sponsor and sponsorSlot allow quick edits by admin.
+    // For real admin control, replace with server-side editing and persistence.
+
+    // Accessibility: focus outline when keyboard used
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Tab') document.body.classList.add('show-focus') });
+
+    // Lightweight: ensure images/SVG are inline or hosted; downloads are placeholders.
+    // Replace placeholder download anchors with real file links when ready.
+
+    // Tiny snippet: If user wants to insert the tiny robot greeting elsewhere, the commented snippet in HTML above is ready to paste.
+  </script>
+
+</body></html>
